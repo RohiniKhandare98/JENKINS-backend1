@@ -1,19 +1,39 @@
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#  name: backend2
+# spec:
+#  replicas: 2
+#  selector:
+#    matchLabels:
+#    type: backend
+#  template:
+#    metadata:
+#     labels:
+#      type: backend
+#    spec:
+#     containers:
+#     - name: container1
+#       image: rohinidocker550/flask:latest
+#       ports:
+#       - containerPort: 4000
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: backend
+  name: backend2
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      type: backend
+      app: backend  # This is a valid label selector, so 'type' is fine here
   template:
     metadata:
       labels:
-        type: backend
+        app: backend  # This is also fine, it defines the label for the Pod
     spec:
       containers:
         - name: container1
-          image: rohinidocker550/flask 
+          image: rohinidocker550/flask:latest
           ports:
             - containerPort: 4000
